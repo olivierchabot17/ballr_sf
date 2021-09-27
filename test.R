@@ -9,3 +9,6 @@ plot_court()
 plot_court(court_theme = court_themes$dark)
 
 # ggsave("court.png", width = 8, height = 8)
+
+# Load shot data
+shots <- readRDS(file = "shots.rds")
