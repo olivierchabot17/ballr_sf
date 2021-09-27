@@ -251,8 +251,8 @@ rm(
   )
 
 rm(
-  line_thick, width, height, key_height, key_width, key_radius, backboard_width,
-  backboard_thick, backboard_offset, hoop_radius, hoop_center_y, rim_thick,
+  line_thick, height, key_height, key_width, key_radius, backboard_width,
+  backboard_thick, backboard_offset, hoop_radius, rim_thick,
   neck_length, three_point_radius, three_point_side_offset, 
   three_point_side_height, restricted_area_radius
 )
