@@ -257,7 +257,7 @@ rm(
   three_point_side_height, restricted_area_radius
 )
 
-plot_court = function(court_theme = court_themes$dark) {
+plot_court = function(court_theme = court_themes$light) {
   ggplot() +
     geom_sf(data = court_sf, fill = court_theme$lines, col = court_theme$lines) +
     theme_void() +
