@@ -53,7 +53,12 @@ st_within(
 )
 
 # Shot Zone Basic
-key <- st_polygon(list(key_ext))
+key <- st_sf(a = 1, geom = st_sfc(st_polygon(list(key_ext))))
+st_crs(shots_sf) <- st_crs(3347)
+st_crs(shots_sf)
+
+st_crs(key) <- st_crs(3347)
+st_crs(key)
 
 ggplot() +
   geom_sf(data = key, fill = NA) +
@@ -67,7 +72,22 @@ within_key <-  st_contains(
 
 sum(within_key)
 
-# Shot angle
+# Shot Distance
+st_within(
+  x = shots_sf,
+  y = hoop_center,
+  100000,
+  sparse = FALSE
+)
 
+st_is_within_distance(
+  x = shots_sf,
+  y = hoop_center,
+  2,
+  sparse = FALSE
+)
+
+
+# Shot angle
 
 
