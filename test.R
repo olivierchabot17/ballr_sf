@@ -2,6 +2,7 @@
 directory <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(directory)
 
+# Load the plot_court() function and other court dimensions
 source("fiba_court_points.R")
 source("spatial_shots_prep.R")
 
@@ -30,6 +31,9 @@ plot_court() +
 # convert shots to an sf object
 shots_sf <- st_as_sf(shots, coords = c("loc_x", "loc_y"))
 
+# st_geometry(shots_sf)
+# st_coordinates(shots_sf)
+
 plot_court() +
   geom_sf(data = shots_sf, aes(colour = shot_made_factor), alpha = 0.2)
 
@@ -39,4 +43,31 @@ plot_court(court_theme = court_themes$dark) +
 plot_court(court_theme = court_themes$dark) +
   geom_sf(data = shots_sf, aes(colour = shot_made_factor), alpha = 0.2) +
   facet_wrap(~player)
+
+# Shot Distance
+st_within(
+  x = shots_sf,
+  y = hoop_center,
+  10,
+  sparse = FALSE
+)
+
+# Shot Zone Basic
+key <- st_polygon(list(key_ext))
+
+ggplot() +
+  geom_sf(data = key, fill = NA) +
+  geom_sf(data = shots_sf, aes(colour = shot_made_factor), alpha = 0.2)
+
+within_key <-  st_contains(
+  x = shots_sf,
+  y = key,
+  sparse = FALSE
+)
+
+sum(within_key)
+
+# Shot angle
+
+
 

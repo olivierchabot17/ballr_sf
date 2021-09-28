@@ -238,25 +238,6 @@ court_sf <- st_sf(
            st_geometry(restricted_area))
 )
 
-rm(
-  half_court_int, half_court_ext, half_court,
-  key, key_circle, key_circle_ext, key_circle_int, key_int, key_ext, key_center,
-  hoop, hoop_center, hoop_ext, hoop_int,
-  backboard, backboard_points,
-  neck, neck_points,
-  three_center, three_ext, three_int, three_point_line,
-  half_circle, half_circle_int, half_circle_ext, half_center,
-  restricted_area, ra_center, ra_ext, ra_int, ra_int_flip,
-  n
-  )
-
-rm(
-  line_thick, height, key_height, key_width, key_radius, backboard_width,
-  backboard_thick, backboard_offset, hoop_radius, rim_thick,
-  neck_length, three_point_radius, three_point_side_offset, 
-  three_point_side_height, restricted_area_radius
-)
-
 plot_court = function(court_theme = court_themes$light) {
   ggplot() +
     geom_sf(data = court_sf, fill = court_theme$lines, col = court_theme$lines) +
@@ -277,4 +258,26 @@ plot_court = function(court_theme = court_themes$light) {
       legend.text = element_text(size = rel(1.0))
     )
 }
+
+# Create a sf object for the court's basic zones
+
+# Remove objects from working directory
+rm(
+  half_court_int, half_court_ext, half_court,
+  key, key_circle, key_circle_ext, key_circle_int, key_int, key_center,
+  hoop, hoop_ext, hoop_int,
+  backboard, backboard_points,
+  neck, neck_points,
+  three_center, three_ext, three_int, three_point_line,
+  half_circle, half_circle_int, half_circle_ext, half_center,
+  restricted_area, ra_center, ra_ext, ra_int, ra_int_flip,
+  n
+)
+
+rm(
+  line_thick, height, key_height, key_width, key_radius, backboard_width,
+  backboard_thick, backboard_offset, hoop_radius, rim_thick,
+  neck_length, three_point_radius, three_point_side_offset, 
+  three_point_side_height, restricted_area_radius
+)
 
