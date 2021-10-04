@@ -101,7 +101,11 @@ basic_polys <- st_sf(
     st_geometry(restricted_area),
     st_geometry(paint)
   )
-)
+) %>%
+  transmute(
+    shot_zone_basic = description,
+    geom
+  )
 
 ############################## Point Value ##################################
 half_court <- st_polygon(list(half_court_int))
@@ -122,7 +126,11 @@ three_point_area <- st_difference(half_court, two_point_area)
 point_polys <- st_sf(
   description = c("Two-Point Area", "Three-Point Area"), 
   geom = c(st_geometry(two_point_area), st_geometry(three_point_area))
-)
+) %>%
+  transmute(
+    area_value = description,
+    geom
+  )
 
 ################################ Distance ###################################
 # 0-8 ft
@@ -165,7 +173,11 @@ distance_polys <- st_sf(
     st_geometry(sixteen_twentyfour_ft),
     st_geometry(twentyfour_plus_ft)
   )
-)
+) %>%
+  transmute(
+    shot_zone_range = description,
+    geom
+  )
 
 ################################# Angle ###################################
 theta_1_rad <- atan((key_width/2) / (key_height - hoop_center_y))
@@ -249,24 +261,28 @@ angle_polys <- st_sf(
     st_geometry(right_center),
     st_geometry(right_side)
   )
-)
+) %>%
+  transmute(
+    shot_zone_area = description,
+    geom
+  )
 
-##################################
-plot_court() +
-  geom_sf(data = basic_polys, aes(fill = factor(description)), alpha = 0.2)
-
-ggsave("basic.png", width = 4, height = 4)
-
-plot_court() +
-  geom_sf(data = point_polys, aes(fill = factor(description)), alpha = 0.2)
-ggsave("point_value.png", width = 4, height = 4)
-
-plot_court() +
-  geom_sf(data = distance_polys, aes(fill = factor(description)), alpha = 0.2)
-ggsave("distance.png", width = 4, height = 4)
-
-plot_court() +
-  geom_sf(data = angle_polys, aes(fill = factor(description)), alpha = 0.2)
-ggsave("angle.png", width = 4, height = 4)
+# ##################################
+# plot_court() +
+#   geom_sf(data = basic_polys, aes(fill = factor(description)), alpha = 0.2)
+# 
+# ggsave("basic.png", width = 4, height = 4)
+# 
+# plot_court() +
+#   geom_sf(data = point_polys, aes(fill = factor(description)), alpha = 0.2)
+# ggsave("point_value.png", width = 4, height = 4)
+# 
+# plot_court() +
+#   geom_sf(data = distance_polys, aes(fill = factor(description)), alpha = 0.2)
+# ggsave("distance.png", width = 4, height = 4)
+# 
+# plot_court() +
+#   geom_sf(data = angle_polys, aes(fill = factor(description)), alpha = 0.2)
+# ggsave("angle.png", width = 4, height = 4)
 
 
